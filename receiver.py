@@ -1,4 +1,6 @@
 from common import *
+from pickle import TRUE, FALSE
+from startSTP.common import checksumCalc
 
 class receiver:
     
@@ -6,7 +8,11 @@ class receiver:
         ''' Checks if a received packet has been corrupted during transmission.
         Return true if computed checksum is different than packet checksum.'''
         
-        return
+        if(packet.checksum != checksumCalc(packet.payload)):
+            return TRUE
+        
+        else:
+            return FALSE
    
     def isDuplicate(self, packet):
         '''checks if packet sequence number is the same as expected sequence number'''
