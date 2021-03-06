@@ -16,7 +16,6 @@ class receiver:
         else:
             return TRUE
         
-        return
     
     def getNextExpectedSeqNum(self):
         '''The expected sequence numbers are 0 or 1'''
