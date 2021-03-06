@@ -10,11 +10,23 @@ class receiver:
    
     def isDuplicate(self, packet):
         '''checks if packet sequence number is the same as expected sequence number'''
+        if(packet.seqNum == self.expectedSeqNum):
+            return FALSE
+        
+        else:
+            return TRUE
+        
         return
     
     def getNextExpectedSeqNum(self):
         '''The expected sequence numbers are 0 or 1'''
-        return
+        if(self.expectedSeqNum == 1):
+            self.expectedSeqNum = 0
+            
+        else:
+            self.expectedSeqNum = 1
+            
+        return self.expectedSeqNum
     
     
     def __init__(self, entityName, ns):
@@ -25,6 +37,7 @@ class receiver:
 
     def init(self):
         '''initialize expected sequence number'''
+        self.expectedSeqNum = 0;
         return
          
 
