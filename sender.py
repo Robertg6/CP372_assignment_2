@@ -94,19 +94,6 @@ class sender:
         '''
         print("inside sender input/n")
         
-        def input(self, packet):
-
-        '''If the acknowlegement packet isn't corrupted or duplicate, 
-        transmission is complete. Therefore, indicate there is no packet
-        in transition.
-        The timer should be stopped, and sequence number  should be updated.
-
-        In the case of duplicate or corrupt acknowlegement packet, it does 
-        not do anything and the packet will be sent again since the
-        timer will be expired and timerInterrupt will be called by the simulator.
-        '''
-        print("inside sender input/n")
-        
         if((self.isCorrupted(packet) != TRUE) or (self.isDuplicate(packet) != TRUE)):
             self.SeqNum = getNextSeqNum(self)
             self.RTT*2
