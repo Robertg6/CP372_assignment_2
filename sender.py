@@ -71,7 +71,7 @@ class sender:
         '''
         checksum = checksumCalc(message)
         
-        pkt = Packet(self, self.sequence_number, 0, checksum, message)
+        pkt = Packet(self.sequence_number, 0, checksum, message)
         self.networkSimulator.udtSend(self.networkSimulator, self.entity, pkt)
         
         self.networkSimulator.startTimer(self.networkSimulator, self.entity, self.RTT)
@@ -87,7 +87,6 @@ class sender:
         transmission is complete. Therefore, indicate there is no packet
         in transition.
         The timer should be stopped, and sequence number  should be updated.
-
         In the case of duplicate or corrupt acknowlegement packet, it does 
         not do anything and the packet will be sent again since the
         timer will be expired and timerInterrupt will be called by the simulator.
@@ -98,4 +97,5 @@ class sender:
             self.networkSimulator.stopTimer(self.networkSimulator, self.entity)
             self.SeqNum = self.getNextSeqNum(self)
         return
+
 
