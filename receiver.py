@@ -22,6 +22,7 @@ class receiver:
         else:
             return TRUE
         
+        return
     
     def getNextExpectedSeqNum(self):
         '''The expected sequence numbers are 0 or 1'''
@@ -30,6 +31,7 @@ class receiver:
             
         else:
             return 1
+            
     
     
     def __init__(self, entityName, ns):
@@ -69,11 +71,10 @@ class receiver:
             else:
                 ack_num = 0
                 
-            self.networkSimulator.deliverData(self.networkSimulator, self.entity, packet)
+            self.networkSimulator.deliverData(self.entity, packet)
             
-        pkt = packet(self, packet.seqNum, ack_num, packet.checksum, packet.payload)
+        pkt = Packet(self, packet.seqNum, ack_num, packet.checksum, packet.payload)
         self.networkSimulator.udtSend(self.networkSimulator, self.entity, pkt)
 
 
         return
-
