@@ -7,7 +7,9 @@ class receiver:
     def isCorrupted(self, packet):
         ''' Checks if a received packet has been corrupted during transmission.
         Return true if computed checksum is different than packet checksum.'''
-        
+        print("in receiver isCorrupted....")
+        print("packet.checksum = "+str(packet.checksum))
+        print("checksumcalc() = "+str(checksumCalc(packet.payload)))
         if(packet.checksum != checksumCalc(packet.payload)):
             return TRUE
         
@@ -21,16 +23,16 @@ class receiver:
         
         else:
             return TRUE
-        
-        return
     
     def getNextExpectedSeqNum(self):
         '''The expected sequence numbers are 0 or 1'''
         if(self.expectedSeqNum == 1):
-            return 0
+            self.expectedSeqNum = 0
             
         else:
-            return 1
+            self.expectedSeqNum= 1
+            
+        return self.expectedSeqNum
             
     
     
@@ -59,22 +61,26 @@ class receiver:
         '''
         ack_num = 1
         
+        print("in receiver input()...")
+        print("iscorrupted() = "+str(self.isCorrupted(packet)))
+        print("isduplicate() = "+str(self.isDuplicate(packet)))
+        
+        
         if((self.isCorrupted(packet) == TRUE) or (self.isDuplicate(packet) == TRUE)):
             if(self.expectedSeqNum == 1):
                 ack_num = 0
             else:
                 ack_num = 1
+            print("B's ack_num (corrupted or duplicate) = "+str(ack_num))
         
         else:
-            if(packet.seqNum == 1):
-                ack_num = 1
-            else:
-                ack_num = 0
-                
+            ack_num = self.expectedSeqNum           
+            print("B's ack_num = "+str(ack_num))  
             self.networkSimulator.deliverData(self.entity, packet)
             
         pkt = Packet(packet.seqNum, ack_num, packet.checksum, packet.payload)
         self.networkSimulator.udtSend(self.entity, pkt)
 
+        self.getNextExpectedSeqNum()
 
         return
