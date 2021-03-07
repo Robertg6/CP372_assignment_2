@@ -32,9 +32,11 @@ class sender:
         '''generate the next sequence number to be used.
         '''
         if(self.sequence_number == 1):
-            return 0
+            self.sequence_number = 0
         else:
-            return 1
+            self.sequence_number = 1
+            
+        return self.sequence_number
 
     def __init__(self, entityName, ns):
         self.entity = entityName
@@ -101,9 +103,3 @@ class sender:
         return
 
 
-
-
-
-
-
-    
