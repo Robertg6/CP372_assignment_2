@@ -1,6 +1,6 @@
 from common import *
 from pickle import TRUE, FALSE
-from startSTP.common import checksumCalc
+from common import checksumCalc
 
 class receiver:
     
