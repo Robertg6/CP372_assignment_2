@@ -8,21 +8,29 @@ class sender:
         during transmission.
         Return true if computed checksum is different than packet checksum.
         '''
-        
-        return
+        if (packet.checksum != checksumCalc(packet.payload))
+          return True;
+       return False;
 
     def isDuplicate(self, packet):
         '''checks if an acknowledgement packet is duplicate or not
         similar to the corresponding function in receiver side
         '''
-
-        return
+        if(packet.seqNum == self.expectedSeqNum):
+            return False
+        else:
+            return True
  
     def getNextSeqNum(self):
         '''generate the next sequence number to be used.
         '''
- 
-        return 
+        if(self.expectedSeqNum == 1):
+            self.expectedSeqNum = 0
+            
+        else:
+            self.expectedSeqNum = 1
+            
+        return self.expectedSeqNum
 
     def __init__(self, entityName, ns):
         self.entity = entityName
