@@ -8,7 +8,7 @@ def checksumCalc(payload):
     #treat each character in the payload as an integer and just add them together
     checksum = 0
     for i in range (0, MAXDATASIZE)
-        checksum += ord(payload[i])
+        checksum += ord(payload.data[i]);
     return checksum
 
 
