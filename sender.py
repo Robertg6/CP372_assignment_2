@@ -95,10 +95,7 @@ class sender:
         print("inside sender input/n")
         
         if((self.isCorrupted(packet) != TRUE) or (self.isDuplicate(packet) != TRUE)):
-            self.SeqNum = getNextSeqNum(self)
-            self.RTT*2
-            
-        else:        
-            self.networkSimulator.deliverData(self.networkSimulator, self.entity, packet)
+            self.networkSimulator.stopTimer(self.networkSimulator, self.entity)
+            self.SeqNum = self.getNextSeqNum(self)
         return
 
