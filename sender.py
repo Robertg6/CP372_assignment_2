@@ -46,8 +46,9 @@ class sender:
         Initially there is no packet is transit and it should be set to None
         '''
         print("inside sender init/n")
-        sequence_number = 0
-        pkt = None
+        self.sequence_number = 0
+        self.pkt = Packet(None)
+
         return
 
     def timerInterrupt(self):
@@ -57,10 +58,8 @@ class sender:
         the timeout to be twice the RTT.
         You never call this function. It is called by the simulator.
         '''
-        print("inside sender timerInterrupt/n")
-
-
-        
+        self.RTT = self.RTT*2
+        self.output(self.pkt.payload)
         return
 
 
@@ -70,10 +69,15 @@ class sender:
         It also start the timer.
         It must ignore the message if there is one packet in transit
         '''
-        print("inside sender output/n")
-
+        checksum = checksumCalc(message)
         
-        self.RTT
+        pkt = Packet(self, self.sequence_number, 0, checksum, message)
+        self.networkSimulator.udtSend(self.networkSimulator, self.entity, pkt)
+        
+        self.networkSimulator.startTimer(self.networkSimulator, self.entity, self.RTT)
+
+        #I don't know how to check if there is already a packet in transit (maybe check to see if the timer is already running?)
+        #do we need a separate variable to keep track of the timeout? Right now we are just multiplying RTT by 2 but I think thats wrong
         return
  
     
