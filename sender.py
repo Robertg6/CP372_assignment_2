@@ -8,22 +8,26 @@ class sender:
         during transmission.
         Return true if computed checksum is different than packet checksum.
         '''
-        if (packet.checksum != checksumCalc(packet.payload))
+    print("inside sender isCorrupted/n")
+        if (packet.checksum != checksumCalc(packet.payload)):
           return True;
-       return False;
+        return False;
 
     def isDuplicate(self, packet):
         '''checks if an acknowledgement packet is duplicate or not
         similar to the corresponding function in receiver side
         '''
+        print("inside sender isDuplicate/n")
         if(packet.seqNum == self.expectedSeqNum):
-            return False
+            return FALSE
+        
         else:
-            return True
+            return TRUE
  
     def getNextSeqNum(self):
         '''generate the next sequence number to be used.
         '''
+        print("inside sender getNextSeqNum/n")
         if(self.expectedSeqNum == 1):
             self.expectedSeqNum = 0
             
@@ -41,8 +45,9 @@ class sender:
         '''initialize the sequence number and the packet in transit.
         Initially there is no packet is transit and it should be set to None
         '''
+        print("inside sender init/n")
         sequence_number = 0
-        
+        pkt = None
         return
 
     def timerInterrupt(self):
@@ -52,6 +57,9 @@ class sender:
         the timeout to be twice the RTT.
         You never call this function. It is called by the simulator.
         '''
+        print("inside sender timerInterrupt/n")
+
+
         
         return
 
@@ -62,7 +70,10 @@ class sender:
         It also start the timer.
         It must ignore the message if there is one packet in transit
         '''
+        print("inside sender output/n")
 
+        
+        self.RTT
         return
  
     
@@ -77,5 +88,20 @@ class sender:
         not do anything and the packet will be sent again since the
         timer will be expired and timerInterrupt will be called by the simulator.
         '''
-
+        print("inside sender input/n")
+        
+        if((self.isCorrupted(packet) == TRUE) or (self.isDuplicate(packet) == TRUE)):
+            if(self.expectedSeqNum == 1):
+                ack_num = 0
+            else:
+                ack_num = 1
+        
+        else:
+            if(packet.seqNum == 1):
+                ack_num = 1
+            else:
+                ack_num = 0
+            self.RTT*2
+                
+            self.networkSimulator.deliverData(self.networkSimulator, self.entity, packet)
         return 
