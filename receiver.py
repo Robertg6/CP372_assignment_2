@@ -57,5 +57,25 @@ class receiver:
         If packet is OK (not a duplicate or corrupted), deliver it to the
         application layer and send an acknowledgement to the sender
         '''
+        ack_num = 1
+        
+        if((self.isCorrupted(packet) == TRUE) or (self.isDuplicate(packet) == TRUE)):
+            if(self.expectedSeqNum == 1):
+                ack_num = 0
+            else:
+                ack_num = 1
+        
+        else:
+            if(packet.seqNum == 1):
+                ack_num = 1
+            else:
+                ack_num = 0
+                
+            self.networkSimulator.deliverData(self.networkSimulator, self.entity, packet)
+            
+        pkt = packet(self, packet.seqNum, ack_num, packet.checksum, packet.payload)
+        self.networkSimulator.udtSend(self.networkSimulator, self.entity, pkt)
+
 
         return
+
