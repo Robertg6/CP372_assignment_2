@@ -73,8 +73,8 @@ class receiver:
                 
             self.networkSimulator.deliverData(self.entity, packet)
             
-        pkt = Packet(self, packet.seqNum, ack_num, packet.checksum, packet.payload)
-        self.networkSimulator.udtSend(self.networkSimulator, self.entity, pkt)
+        pkt = Packet(packet.seqNum, ack_num, packet.checksum, packet.payload)
+        self.networkSimulator.udtSend(self.entity, pkt)
 
 
         return
