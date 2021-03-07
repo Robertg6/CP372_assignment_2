@@ -6,10 +6,10 @@ MAXDATASIZE = 20;   # This constant controls the maximum size of the buffer in a
 def checksumCalc(payload):
     #The implemention of function that calculates checksum goes here
     #treat each character in the payload as an integer and just add them together
-    checksum = 0
-    for i in range (0, MAXDATASIZE)
-        checksum += ord(payload.data[i]);
-    return checksum
+    chckSum = 0
+    for i in payload:
+        chckSum += ord(i)
+    return chckSum
 
 
 class Packet:
