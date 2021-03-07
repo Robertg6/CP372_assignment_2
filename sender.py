@@ -47,7 +47,7 @@ class sender:
         '''
         print("inside sender init/n")
         self.sequence_number = 0
-        self.pkt = Packet(None)
+        self.pkt = None
 
         return
 
