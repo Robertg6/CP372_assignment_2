@@ -26,12 +26,10 @@ class receiver:
     def getNextExpectedSeqNum(self):
         '''The expected sequence numbers are 0 or 1'''
         if(self.expectedSeqNum == 1):
-            self.expectedSeqNum = 0
+            return 0
             
         else:
-            self.expectedSeqNum = 1
-            
-        return self.expectedSeqNum
+            return 1
     
     
     def __init__(self, entityName, ns):
