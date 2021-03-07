@@ -1,6 +1,6 @@
 from common import *
 from pickle import TRUE, FALSE
-from startSTP.common import checksumCalc
+from common import checksumCalc
 
 class sender:
     RTT = 20
@@ -10,7 +10,7 @@ class sender:
         during transmission.
         Return true if computed checksum is different than packet checksum.
         '''
-        print("inside sender isCorrupted/n")
+        
         
         if(packet.checksum != checksumCalc(packet.payload)):
             return True;
@@ -21,7 +21,6 @@ class sender:
         '''checks if an acknowledgement packet is duplicate or not
         similar to the corresponding function in receiver side
         '''
-        print("inside sender isDuplicate/n")
         
         if(packet.seqNum == self.expectedSeqNum):
             return FALSE
@@ -32,10 +31,8 @@ class sender:
     def getNextSeqNum(self):
         '''generate the next sequence number to be used.
         '''
-        print("inside sender getNextSeqNum/n")
-        if(self.expectedSeqNum == 1):
+        if(self.sequence_number == 1):
             return 0
-            
         else:
             return 1
 
@@ -48,7 +45,6 @@ class sender:
         '''initialize the sequence number and the packet in transit.
         Initially there is no packet is transit and it should be set to None
         '''
-        print("inside sender init/n")
         self.sequence_number = 0
         self.pkt = None
 
@@ -90,18 +86,24 @@ class sender:
         transmission is complete. Therefore, indicate there is no packet
         in transition.
         The timer should be stopped, and sequence number  should be updated.
-
         In the case of duplicate or corrupt acknowlegement packet, it does 
         not do anything and the packet will be sent again since the
         timer will be expired and timerInterrupt will be called by the simulator.
         '''
 
-        print("inside sender input/n")
     
     
         if((self.isCorrupted(packet) != TRUE) or (self.isDuplicate(packet) != TRUE)):
             self.networkSimulator.stopTimer(self.entity)
-            self.SeqNum = self.getNextSeqNum(self)
+            self.SeqNum = self.getNextSeqNum()
             
             
         return
+
+
+
+
+
+
+
+    
