@@ -8,7 +8,7 @@ class sender:
         during transmission.
         Return true if computed checksum is different than packet checksum.
         '''
-    print("inside sender isCorrupted/n")
+        print("inside sender isCorrupted/n")
         if (packet.checksum != checksumCalc(packet.payload)):
           return True;
         return False;
