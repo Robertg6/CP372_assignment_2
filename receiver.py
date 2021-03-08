@@ -10,7 +10,7 @@ class receiver:
         #print("in receiver isCorrupted....")
         #print("packet.checksum = "+str(packet.checksum))
         #print("checksumcalc() = "+str(checksumCalc(packet.payload)))
-        if(packet.checksum != checksumCalc(packet.payload)):
+        if((packet.checksum - packet.seqNum)!= checksumCalc(packet.payload)):
             return TRUE
         
         else:
@@ -80,11 +80,12 @@ class receiver:
             #print("B's ack_num (corrupted or duplicate) = "+str(ack_num))
         
         else:
-            ack_num = self.expectedSeqNum           
-            #print("B's ack_num = "+str(ack_num))  
+            ack_num = self.expectedSeqNum          
             self.networkSimulator.deliverData(self.entity, packet)
             
-        pkt = Packet(0, ack_num, packet.checksum, packet.payload)
+        pkt_checksum = (packet.checksum + packet.seqNum) - packet.checksum
+        #pkt = Packet(0, ack_num, packet.checksum, packet.payload)
+        pkt = Packet(0, ack_num, pkt_checksum)
         self.networkSimulator.udtSend(self.entity, pkt)
 
         self.getNextExpectedSeqNum()
