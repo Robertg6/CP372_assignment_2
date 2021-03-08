@@ -59,8 +59,11 @@ class sender:
         the timeout to be twice the RTT.
         You never call this function. It is called by the simulator.
         '''
-        self.RTT = self.RTT*2
+        #self.RTT = self.RTT*2
         #self.output(self.pkt.payload)
+        
+        self.networkSimulator.udtSend(self.entity, self.pkt)
+        self.networkSimulator.startTimer(self.entity, 2*self.RTT)
         return
 
 
@@ -72,8 +75,9 @@ class sender:
         '''
         checksum = checksumCalc(message.data)
         
-        pkt = Packet(self.sequence_number, 0, checksum + self.sequence_number, message.data)
-        self.networkSimulator.udtSend(self.entity, pkt)
+        #pkt = Packet(self.sequence_number, 0, checksum + self.sequence_number, message.data)
+        self.pkt = Packet(self.sequence_number, 0, checksum + self.sequence_number, message.data)
+        self.networkSimulator.udtSend(self.entity, self.pkt)
         
         self.networkSimulator.startTimer(self.entity, self.RTT)
 
@@ -102,3 +106,4 @@ class sender:
             
             
         return
+
