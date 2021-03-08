@@ -60,7 +60,7 @@ class sender:
         You never call this function. It is called by the simulator.
         '''
         self.RTT = self.RTT*2
-        self.output(self.pkt.payload)
+        #self.output(self.pkt.payload)
         return
 
 
@@ -101,5 +101,3 @@ class sender:
             
             
         return
-
-
