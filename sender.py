@@ -72,7 +72,7 @@ class sender:
         '''
         checksum = checksumCalc(message.data)
         
-        pkt = Packet(self.sequence_number, 0, checksum, message.data)
+        pkt = Packet(self.sequence_number, 0, checksum + self.sequence_number, message.data)
         self.networkSimulator.udtSend(self.entity, pkt)
         
         self.networkSimulator.startTimer(self.entity, self.RTT)
