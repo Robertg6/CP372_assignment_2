@@ -98,6 +98,7 @@ class sender:
         if((self.isCorrupted(packet) != TRUE) or (self.isDuplicate(packet) != TRUE)):
             self.networkSimulator.stopTimer(self.entity)
             self.SeqNum = self.getNextSeqNum()
+            self.pkt = None
             
             
         return
