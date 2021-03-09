@@ -63,16 +63,16 @@ class receiver:
         '''
         ack_num = 1
         
-        print("in receiver input()...")
-        if(self.isCorrupted(packet) == TRUE):
-            print("isCorrupted() = TRUE")
-        else:
-            print("isCorrupted() = FALSE")
+        #print("in receiver input()...")
+        #if(self.isCorrupted(packet) == TRUE):
+            #print("isCorrupted() = TRUE")
+        #else:
+            #print("isCorrupted() = FALSE")
 
-        if(self.isDuplicate(packet) == TRUE):
-            print("isDuplicate() = TRUE")
-        else:
-            print("isDuplicate() = FALSE")
+        #if(self.isDuplicate(packet) == TRUE):
+            #print("isDuplicate() = TRUE")
+        #else:
+            #print("isDuplicate() = FALSE")
         
         if((self.isCorrupted(packet) == TRUE) or (self.isDuplicate(packet) == TRUE)):
             if(self.expectedSeqNum == 1):
